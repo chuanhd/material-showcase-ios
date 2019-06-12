@@ -69,6 +69,7 @@ public class MaterialShowcase: UIView {
   @objc public var targetTintColor: UIColor!
   @objc public var targetHolderRadius: CGFloat = 0.0
   @objc public var targetHolderColor: UIColor!
+  @objc public var useRectangle : Bool = false
   // Text
   @objc public var primaryText: String!
   @objc public var secondaryText: String!
@@ -334,11 +335,15 @@ extension MaterialShowcase {
   
   /// A background view which add ripple animation when showing target view
   private func addTargetRipple(at center: CGPoint) {
-    targetRippleView = UIView(frame: CGRect(x: 0, y: 0, width: targetHolderRadius * 2,height: targetHolderRadius * 2))
+    if (useRectangle) {
+      targetRippleView = UIView(frame: CGRect(x: 0, y: 0, width: targetView.frame.size.width, height: targetView.frame.size.height))
+    } else {
+      targetRippleView = UIView(frame: CGRect(x: 0, y: 0, width: targetHolderRadius * 2,height: targetHolderRadius * 2))
+      targetRippleView.asCircle()
+    }
     targetRippleView.center = center
     targetRippleView.backgroundColor = aniRippleColor
     targetRippleView.alpha = 0.0 //set it invisible
-    targetRippleView.asCircle()
     addSubview(targetRippleView)
   }
   
@@ -346,10 +351,14 @@ extension MaterialShowcase {
   private func addTargetHolder(at center: CGPoint) {
     hiddenTargetHolderView = UIView()
     hiddenTargetHolderView.backgroundColor = .clear
-    targetHolderView = UIView(frame: CGRect(x: 0, y: 0, width: targetHolderRadius * 2,height: targetHolderRadius * 2))
+    if (useRectangle) {
+      targetHolderView = UIView(frame: CGRect(x: 0, y: 0, width: targetView.frame.size.width, height: targetView.frame.size.height))
+    } else {
+      targetHolderView = UIView(frame: CGRect(x: 0, y: 0, width: targetHolderRadius * 2,height: targetHolderRadius * 2))
+      targetHolderView.asCircle()
+    }
     targetHolderView.center = center
     targetHolderView.backgroundColor = targetHolderColor
-    targetHolderView.asCircle()
     hiddenTargetHolderView.frame = targetHolderView.frame
     targetHolderView.transform = CGAffineTransform(scaleX: 1/ANI_TARGET_HOLDER_SCALE, y: 1/ANI_TARGET_HOLDER_SCALE) // Initial set to support animation
     addSubview(hiddenTargetHolderView)
