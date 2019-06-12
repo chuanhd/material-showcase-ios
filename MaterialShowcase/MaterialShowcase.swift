@@ -336,7 +336,7 @@ extension MaterialShowcase {
   /// A background view which add ripple animation when showing target view
   private func addTargetRipple(at center: CGPoint) {
     if (useRectangle) {
-      targetRippleView = UIView(frame: CGRect(x: 0, y: 0, width: targetView.frame.size.width, height: targetView.frame.size.height))
+      targetRippleView = UIView(frame: CGRect(x: 0, y: 0, width: targetView.frame.size.width + 16, height: targetView.frame.size.height + 16))
     } else {
       targetRippleView = UIView(frame: CGRect(x: 0, y: 0, width: targetHolderRadius * 2,height: targetHolderRadius * 2))
       targetRippleView.asCircle()
@@ -352,7 +352,7 @@ extension MaterialShowcase {
     hiddenTargetHolderView = UIView()
     hiddenTargetHolderView.backgroundColor = .clear
     if (useRectangle) {
-      targetHolderView = UIView(frame: CGRect(x: 0, y: 0, width: targetView.frame.size.width, height: targetView.frame.size.height))
+      targetHolderView = UIView(frame: CGRect(x: 0, y: 0, width: targetView.frame.size.width + 16, height: targetView.frame.size.height + 16))
     } else {
       targetHolderView = UIView(frame: CGRect(x: 0, y: 0, width: targetHolderRadius * 2,height: targetHolderRadius * 2))
       targetHolderView.asCircle()
